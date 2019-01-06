@@ -7,9 +7,25 @@ modules:
     path: firstHTMLMod
     requires:
       - name: UAA-service
+
+  - name: db
+    type: hdb
+    path: db
+    requires:
+     - name: hdi_db
+
 resources:
   - name: UAA-service
     type: com.sap.xs.uaa-space
     description: UAA for html app
     parameters:
       config-path: ./xs-security.json
+
+  - name: hdi_db
+    parameters:
+       config:
+          schema: db
+    properties:
+       hdi-container-name: ${service-name}
+    type: com.sap.xs.hdi-container
+
